@@ -87,6 +87,11 @@ const listTasksToDelete = async ( tasks = [] ) => {
         }
     });
 
+    choices.unshift({
+        value: "0",
+        name: "0. ".blue + "Cancelar".yellow
+    });
+
     const question = {
         type: "list",
         name: "id",
@@ -112,10 +117,33 @@ const confirm = async (message) => {
     return ok;
 }
 
+const listTasksToComplete = async ( tasks = [] ) => {
+
+    const choices = tasks.map( (task, index) => {
+        const number = `${index + 1}.`.blue;
+        return {
+            value: task.id,
+            name: `${number} ${task.description.yellow}`,
+            checked: (task.completedIn !== null)
+        }
+    });
+
+    const question = {
+        type: "checkbox",
+        name: "ids",
+        message: "Seleccione las tareas que desea completar",
+        choices
+    }
+
+    const { ids } = await inquirer.prompt(question);
+    return ids;
+}
+
 module.exports = {
     inquirerMenu,
     pauseMenu,
     readInput,
     listTasksToDelete,
-    confirm
+    confirm,
+    listTasksToComplete
 }
