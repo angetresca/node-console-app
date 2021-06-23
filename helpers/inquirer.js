@@ -9,31 +9,31 @@ const questions = [
         choices: [
             {
                 value: "1",
-                name: "1. Crear tarea"
+                name: `${"1.".blue} ${"Crear tarea".yellow}`
             },
             {
                 value: "2",
-                name: "2. Listar tareas"
+                name: `${"2.".blue} ${"Listar tareas".yellow}`
             },
             {
                 value: "3",
-                name: "3. Listar tareas completadas"
+                name: `${"3.".blue} ${"Listar tareas completadas".yellow}`
             },
             {
                 value: "4",
-                name: "4. Listar tareas pendientes"
+                name: `${"4.".blue} ${"Listar tareas pendientes".yellow}`
             },
             {
                 value: "5",
-                name: "5. Completar tarea(s)"
+                name: `${"5.".blue} ${"Completar tarea(s)".yellow}`
             },
             {
                 value: "6",
-                name: "6. Borrar tarea"
+                name: `${"6.".blue} ${"Borrar tarea".yellow}`
             },
             {
                 value: "0",
-                name: "0. Salir"
+                name: `${"0.".blue} ${"Salir".yellow}`
             },
         ]
     }
@@ -50,11 +50,28 @@ const inquirerMenu = async () => {
     return option;
 }
 
+const readInput = async (message) => {
+    const inputQuestion = [{
+        type: "input",
+        name: "description",
+        message,
+        validate(value) {
+            if (value.length === 0) {
+                return "Por favor ingrese un valor";
+            }
+            return true;
+        }
+    }]
+    console.log("\n");
+    const { description } = await inquirer.prompt(inputQuestion);
+    return description;
+}
+
 const pauseMenu = async () => {
     const inputQuestion = [{
         type: "input",
         name: "enter",
-        message: `Presione ${ "ENTER".blue } para continuar...`,
+        message: `${"Presione".yellow} ${ "ENTER".blue } ${"para continuar...".yellow}`,
     }]
     console.log("\n");
     await inquirer.prompt(inputQuestion);
@@ -62,5 +79,6 @@ const pauseMenu = async () => {
 
 module.exports = {
     inquirerMenu,
-    pauseMenu
+    pauseMenu,
+    readInput
 }
