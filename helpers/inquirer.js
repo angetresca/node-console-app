@@ -71,14 +71,51 @@ const pauseMenu = async () => {
     const inputQuestion = [{
         type: "input",
         name: "enter",
-        message: `${"Presione".yellow} ${ "ENTER".blue } ${"para continuar...".yellow}`,
+        message: `${"Presione".yellow} ${ "enter".blue } ${"para continuar...".yellow}`,
     }]
     console.log("\n");
     await inquirer.prompt(inputQuestion);
 }
 
+const listTasksToDelete = async ( tasks = [] ) => {
+
+    const choices = tasks.map( (task, index) => {
+        const number = `${index + 1}.`.blue;
+        return {
+            value: task.id,
+            name: `${number} ${task.description.yellow}`
+        }
+    });
+
+    const question = {
+        type: "list",
+        name: "id",
+        message: "¿Qué tarea desea borrar?",
+        choices
+    }
+
+    const { id } = await inquirer.prompt(question);
+    return id;
+}
+
+const confirm = async (message) => {
+    const question = [
+        {
+            type: "confirm",
+            name: "ok",
+            message
+        }
+    ];
+
+    const { ok } = await inquirer.prompt(question);
+
+    return ok;
+}
+
 module.exports = {
     inquirerMenu,
     pauseMenu,
-    readInput
+    readInput,
+    listTasksToDelete,
+    confirm
 }

@@ -23,6 +23,12 @@ class Tasks {
         return list;
     }
 
+    deleteTask ( id = "" ) {
+        if (this._list[id]) {
+            delete this._list[id];
+        }
+    }
+
     loadTasksFromArray ( tasks = [] ) {
         tasks.forEach(task => {
             this._list[task.id] = new Task(task.description, task.id, task.completedIn);
@@ -38,8 +44,21 @@ class Tasks {
         console.log();
         this.arrayList.forEach((task, index) => {
             const number = `${index + 1}.`.blue;
-            const state =  (task.completedIn) ? "Completada".green : "Pendiente".red;
+            const state =  (task.completedIn) ? `${task.completedIn}`.green : "Pendiente".red;
             const description = task.description.yellow;
+            console.log(`${number} ${description} :: ${state}`);
+        });
+    }
+
+    listPendingOrCompleted( completed = true ) {
+        console.log();
+        let counter = 0;
+        this.arrayList.forEach(task => {
+            if ((completed && !task.completedIn) || (!completed && task.completedIn)) return null;
+            counter++;
+            const number = `${counter}.`.blue;
+            const description = task.description.yellow;
+            const state =  (task.completedIn) ? `${task.completedIn}`.green : "Pendiente".red;
             console.log(`${number} ${description} :: ${state}`);
         });
     }
