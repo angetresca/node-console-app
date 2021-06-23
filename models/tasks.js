@@ -33,6 +33,16 @@ class Tasks {
         const task = new Task(description);
         this._list[task.id] = task;
     }
+
+    printCompleteList () {
+        console.log();
+        this.arrayList.forEach((task, index) => {
+            const number = `${index + 1}.`.blue;
+            const state =  (task.completedIn) ? "Completada".green : "Pendiente".red;
+            const description = task.description.yellow;
+            console.log(`${number} ${description} :: ${state}`);
+        });
+    }
 }
 
 module.exports = Tasks;

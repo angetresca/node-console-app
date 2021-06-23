@@ -15,6 +15,8 @@ class Task {
         }
 
         if (completedIn) {
+            this.completedIn = completedIn;
+        } else {
             this.completedIn = null;
         }
         

@@ -23,7 +23,7 @@ const main = async () => {
                 tasks.createTask(description);
                 break;
             case "2":
-                console.log(tasks.arrayList);
+                tasks.printCompleteList();
                 break;
             case "3":
 
