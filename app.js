@@ -1,5 +1,6 @@
 require("colors");
 const { inquirerMenu, pauseMenu, readInput } = require("./helpers/inquirer");
+const { saveDB } = require("./helpers/saveFile");
 const Tasks = require("./models/tasks");
 
 
@@ -31,6 +32,8 @@ const main = async () => {
 
                 break;
         }
+
+        saveDB(tasks.arrayList);
 
         await pauseMenu();
 
