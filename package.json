@@ -1,0 +1,22 @@
+{
+  "name": "node-console-app",
+  "version": "1.0.0",
+  "description": "Aplicación de console",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angetresca/node-console-app.git"
+  },
+  "author": "Angelina Inés Tresca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angetresca/node-console-app/issues"
+  },
+  "homepage": "https://github.com/angetresca/node-console-app#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
