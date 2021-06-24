@@ -12,45 +12,45 @@ class Tasks {
         this._list = {};
     }
 
-    get arrayList () {
+    get arrayList() {
 
         const list = [];
-        
-        Object.keys(this._list).forEach( key => {
+
+        Object.keys(this._list).forEach(key => {
             list.push(this._list[key]);
-        } );
+        });
 
         return list;
     }
 
-    deleteTask ( id = "" ) {
+    deleteTask(id = "") {
         if (this._list[id]) {
             delete this._list[id];
         }
     }
 
-    loadTasksFromArray ( tasks = [] ) {
+    loadTasksFromArray(tasks = []) {
         tasks.forEach(task => {
             this._list[task.id] = new Task(task.description, task.id, task.completedIn);
         })
     }
 
-    createTask ( description = "" ) {
+    createTask(description = "") {
         const task = new Task(description);
         this._list[task.id] = task;
     }
 
-    printCompleteList () {
+    printCompleteList() {
         console.log();
         this.arrayList.forEach((task, index) => {
             const number = `${index + 1}.`.blue;
-            const state =  (task.completedIn) ? `${task.completedIn}`.green : "Pendiente".red;
+            const state = (task.completedIn) ? "Completada".green : "Pendiente".red;
             const description = task.description.yellow;
             console.log(`${number} ${description} :: ${state}`);
         });
     }
 
-    listPendingOrCompleted( completed = true ) {
+    listPendingOrCompleted(completed = true) {
         console.log();
         let counter = 0;
         this.arrayList.forEach(task => {
@@ -58,8 +58,18 @@ class Tasks {
             counter++;
             const number = `${counter}.`.blue;
             const description = task.description.yellow;
-            const state =  (task.completedIn) ? `${task.completedIn}`.green : "Pendiente".red;
+            const state = (task.completedIn) ? `${task.completedIn}`.green : "Pendiente".red;
             console.log(`${number} ${description} :: ${state}`);
+        });
+    }
+
+    toggleCompletedTasks(ids = []) {
+        this.arrayList.forEach(task => {
+            if (!ids.includes(task.id)) {
+                this._list[task.id].completedIn = null;
+            } else if (!task.completedIn) {
+                task.completedIn = new Date().toISOString();
+            }
         });
     }
 }

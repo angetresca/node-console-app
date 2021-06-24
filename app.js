@@ -19,7 +19,7 @@ const main = async () => {
 
         switch (opt) {
             case "1":
-                const description = await readInput("Descripcion:");
+                const description = await readInput("Descripción:");
                 tasks.createTask(description);
                 break;
             case "2":
@@ -33,17 +33,17 @@ const main = async () => {
                 break;
             case "5":
                 const ids = await listTasksToComplete(tasks.arrayList);
-                console.log(ids);
-
+                tasks.toggleCompletedTasks(ids);
+                console.log("Tareas actualizadas correctamente!".green);
                 break;
             case "6":
                 const id = await listTasksToDelete(tasks.arrayList);
                 if (id !== "0") {
-                    const isSureToDelete = confirm("¿Estás seguro que deseas borrar esta tarea?");
+                    const isSureToDelete = await confirm("¿Estás seguro que deseas borrar esta tarea?");
 
                     if (isSureToDelete) {
                         tasks.deleteTask(id);
-                        console.log("Tarea borrada correctamente!");
+                        console.log("Tarea borrada correctamente!".green);
                     }
                 }
                 break;
